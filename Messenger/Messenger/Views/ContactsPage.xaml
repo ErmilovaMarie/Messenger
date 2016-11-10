@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Messenger.Views.ContactsPage">
+    <ListView ItemSource="{Binding Contacts}"
+              HasUnevenRows="True">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <ViewCell>
+            <ViewCell.View>
+              <StackLayout Operation="Horizontal">
+                <Image Source="{Binding Image}"
+                       HeightRequest="100"
+                       WidthRequest="100" />
+                <StackLayout>
+                  <Label Text="{Binding FullName}"
+                         FontSize="Medium" />
+                  <Label Text="{Binding LastMessage}" />
+                </StackLayout>
+              </StackLayout>
+            </ViewCell.View>
+          </ViewCell>
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
