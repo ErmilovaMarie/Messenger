@@ -24,13 +24,18 @@ namespace Messenger.ViewModels
         {
             _page = page;
             LoginCommand = new Command(OpenContacts);
+            RegisterCommand = new Command(OpenRegister);
         }
-
+        private async void OpenRegister()
+        {
+            await _page.Navigation.PushAsync(new RegisterPage());
+        }
         private async void OpenContacts()
         {
             Debug.WriteLine($"UserName: {UserName}, Password: {Password}");
             await _page.Navigation.PushAsync(new ContactsPage());
         }
+
 
     }
 }

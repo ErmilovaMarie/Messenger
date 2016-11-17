@@ -2,13 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Messenger.Views.ContactsPage">
-    <ListView ItemsSource="{Binding Contacts}"
-              HasUnevenRows="True">
+      <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Профиль" 
+                     Command="{Binding ProfileCommand}" />
+        <ToolbarItem Text="Выход"
+                     Command="{Binding ExitCommand}" />
+      </ContentPage.ToolbarItems>
+  <ListView ItemsSource="{Binding Contacts}"
+            HasUnevenRows="True"
+            ItemTapped="ListView_OnItemTapped" 
+            x:Name ="listview">
       <ListView.ItemTemplate>
         <DataTemplate>
           <ViewCell>
             <ViewCell.View>
-              <StackLayout Operation="Horizontal">
+              <StackLayout Orientation="Horizontal">
                 <Image Source="{Binding Image}"
                        HeightRequest="100"
                        WidthRequest="100" />

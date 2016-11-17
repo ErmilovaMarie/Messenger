@@ -2,5 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Messenger.Views.ChatPage">
-  <Label Text="{Binding MainText}" VerticalOptions="Center" HorizontalOptions="Center" />
+  <ListView ItemsSource="{Binding Chat}"
+            HasUnevenRows="True">
+    <ListView.ItemTemplate>
+      <DataTemplate>
+        <ViewCell>
+          <ViewCell.View>
+            <StackLayout Orientation="Horizontal" >
+              <Image Source="{Binding Image}"
+                     HeightRequest="100"
+                     WidthRequest="100" />
+              <StackLayout>
+                <Label Text="{Binding FullName}"
+                       FontSize="Medium"/>
+                <Label Text="{Binding Message}" />
+              </StackLayout>  
+            </StackLayout>
+          </ViewCell.View>
+        </ViewCell>
+      </DataTemplate>
+    </ListView.ItemTemplate>
+    
+  </ListView>
+  <StackLayout Orientation="Horizontal"
+               VerticalOptions="End">
+    <Entry Text="{Binding Message}" 
+           WidthRequest="250"/>
+    <Button Text="Отправить" 
+            Command="{Binding SendMessage}"/>
+  </StackLayout>
 </ContentPage>

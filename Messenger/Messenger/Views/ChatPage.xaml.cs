@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Messenger.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,7 @@ namespace Messenger.Views
         public ChatPage()
         {
             InitializeComponent();
+            BindingContext = new ChatViewModel();
         }
     }
 }
