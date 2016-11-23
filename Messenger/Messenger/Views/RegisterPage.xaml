@@ -11,9 +11,11 @@
     <Label Text="Имя пользователя" />
     <Entry Text="{Binding UserName}" />
     <Label Text="Пароль" />
-    <Entry Text="{Binding Password}" />
+    <Entry Text="{Binding Password}" 
+            IsPassword="True"/>
     <Label Text="Подтверждение пароля" />
-    <Entry Text="{Binding Password}" />
+    <Entry Text="{Binding Password}"
+           IsPassword="True"/>
 
     <Button Text="Зарегистрироваться"
             Command="{Binding RegisterCommand}" />
