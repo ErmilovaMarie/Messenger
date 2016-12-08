@@ -1,4 +1,5 @@
-﻿using Messenger.Views;
+﻿using Messenger.Services;
+using Messenger.Views;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -33,7 +34,7 @@ namespace Messenger.ViewModels
         }
         private async void OpenContacts()
         {
-            var DataService = DataService.GetInstance();
+            var dataService = DataService.GetInstance();
             var status = await dataService.LoginAsync(UserName, Password);
             if (status == HttpStatusCode.OK)
             {

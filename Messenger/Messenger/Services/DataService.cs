@@ -31,7 +31,7 @@ namespace Messenger.Services
             return _dataService;
         }
 
-        public async Task<HttpStatusCode> LoginAsync(string userName, string password)
+        public async Task<HttpStatusCode> LoginAsync(string UserName, string Password)
         {
             try
             {
@@ -43,8 +43,8 @@ namespace Messenger.Services
                 var xmlDocument = new XDocument();
                 var auth = new XElement(defaultNamespace + "Auth");
                 auth.Add(new XAttribute(XNamespace.Xmlns + "i", instanceNamespace));
-                auth.Add(new XElement(defaultNamespace + "UserName", userName));
-                auth.Add(new XElement(defaultNamespace + "Password", password));
+                auth.Add(new XElement(defaultNamespace + "UserName", UserName));
+                auth.Add(new XElement(defaultNamespace + "Password", Password));
                 xmlDocument.Add(auth);
 
                 var xml = xmlDocument.ToString();
