@@ -49,7 +49,7 @@ namespace Messenger.Services
                 var xml = xmlDocument.ToString();
 
                 return (await _httpClient.PostAsync(new Uri($"{_baseUrl}/auth/credentials"),
-                    new StringContent(xml, Encoding.UTF8, "application/xml"))).StatusCode;
+                    new StringContent (xml, Encoding.UTF8, "application/xml"))).StatusCode;
             }
             catch (Exception e)
             {
