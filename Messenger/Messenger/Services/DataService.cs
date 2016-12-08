@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -18,7 +19,7 @@ namespace Messenger.Services
             DefaultRequestHeaders = { IfModifiedSince = DateTimeOffset.Now }
         };
 
-        private readonly string _baseUrl = "http://127.0.0.1:9000";
+        private readonly string _baseUrl = "http://192.168.43.80:9000";
 
         protected DataService()
         {
