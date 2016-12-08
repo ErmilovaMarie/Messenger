@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace Messenger.Services
 {
-    class DataService
+    public class DataService
     {
         private static readonly DataService _dataService = new DataService();
 
@@ -19,7 +19,7 @@ namespace Messenger.Services
             DefaultRequestHeaders = { IfModifiedSince = DateTimeOffset.Now }
         };
 
-        private readonly string _baseUrl = "http://192.168.43.80:9000";
+        private readonly string _baseUrl = "http://192.168.43.80:9000/";
 
         protected DataService()
         {
@@ -31,7 +31,7 @@ namespace Messenger.Services
             return _dataService;
         }
 
-        public async Task<HttpStatusCode> LoginAsync(string UserName, string Password)
+        public async Task<HttpStatusCode> LoginAsync(string userName, string password)
         {
             try
             {
@@ -43,8 +43,8 @@ namespace Messenger.Services
                 var xmlDocument = new XDocument();
                 var auth = new XElement(defaultNamespace + "Auth");
                 auth.Add(new XAttribute(XNamespace.Xmlns + "i", instanceNamespace));
-                auth.Add(new XElement(defaultNamespace + "UserName", UserName));
-                auth.Add(new XElement(defaultNamespace + "Password", Password));
+                auth.Add(new XElement(defaultNamespace + "UserName", userName));
+                auth.Add(new XElement(defaultNamespace + "Password", password));
                 xmlDocument.Add(auth);
 
                 var xml = xmlDocument.ToString();
