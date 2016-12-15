@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Messenger.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -56,6 +59,20 @@ namespace Messenger.Services
             {
                 Debug.WriteLine(e.Message);
                 return HttpStatusCode.SeeOther;
+            }
+        }
+        public async Task<List<ContactModel>> LoadContactsAsync()
+        {
+            try
+            {
+                var json = await _httpClient.GetStringAsync(new Uri($"{_baseUrl}/contacts.json"));
+                var jObj = JObject.Parse(json);
+                return JsonConvert.DeserializeObject<List<ContactModel>>(jObj["Contacts"].ToString());
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return new List<ContactModel>();
             }
         }
     }

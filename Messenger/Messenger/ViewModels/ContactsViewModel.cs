@@ -1,4 +1,5 @@
 ﻿using Messenger.Models;
+using Messenger.Services;
 using Messenger.Views;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,22 @@ namespace Messenger.ViewModels
 {
     public class ContactsViewModel : ContentView
     {
-        public ObservableCollection<ContactModel> Contacts { get; set; } = new ObservableCollection<ContactModel>
+        public ObservableCollection<ContactModel> Contacts { get; set; } = new ObservableCollection<ContactModel>();
+
+        public async Task LoadContactsAsync()
+        {
+            var dataService = DataService.GetInstance();
+            var contacts = await dataService.LoadContactsAsync();
+
+            foreach (var contact in contacts)
+            {
+                contact.Image = "http://192.168.43.80:9000/" + contact.Image;
+                Contacts.Add(contact);
+            }
+        }
+
+
+        /*public ObservableCollection<ContactModel> Contacts { get; set; } = new ObservableCollection<ContactModel>
         {
             new ContactModel
             {
@@ -47,6 +63,6 @@ namespace Messenger.ViewModels
         public async Task OpenChat ()
         {
             await _page.Navigation.PushAsync(new ChatPage());
-        }
+        } */
     }
 }

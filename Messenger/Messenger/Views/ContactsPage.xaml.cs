@@ -16,14 +16,19 @@ namespace Messenger.Views
         public ContactsPage()
         {
             InitializeComponent();
-            _viewmodel = new ContactsViewModel(this);
+            _viewmodel = new ContactsViewModel();
             BindingContext = _viewmodel;
-            listview.ItemsSource = _viewmodel.Contacts;
+            
+        }
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await _viewmodel.LoadContactsAsync();
         }
 
-        private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
+        /*private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             await _viewmodel.OpenChat();
-        }
+        }*/
     }
 }
