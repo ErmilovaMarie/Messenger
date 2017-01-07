@@ -61,6 +61,49 @@ namespace Messenger.Services
                 return HttpStatusCode.SeeOther;
             }
         }
+        public async Task<HttpStatusCode> LogoutAsync()
+        {
+            try
+            {
+                var response = await _httpClient.PostAsync(new Uri($"{_baseUrl}/auth/logout"),
+                   new StringContent(""));
+                return  response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return HttpStatusCode.SeeOther;
+            }
+        }
+        public async Task<HttpStatusCode>RegisterAsync(string FullName, string userName, string password)
+        {
+            try
+            {
+                var json = new JObject { { "FullName", FullName }, { "UserName", userName }, { "Password", password } }.ToString();
+                return (await _httpClient.PostAsync(new Uri($"{_baseUrl}/register"),
+                        new StringContent(json, Encoding.UTF8, "application/json"))).StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return HttpStatusCode.SeeOther;
+            }
+        }
+        public async Task<HttpStatusCode>ProfileAsync(string FullName)
+        {
+            try
+            {
+                var json = new JObject { { "FullName", FullName } }.ToString();
+                return (await _httpClient.PostAsync(new Uri($"{_baseUrl}/profile"),
+                    new StringContent(json, Encoding.UTF8, "application/json"))).StatusCode;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return HttpStatusCode.SeeOther;
+            }
+        }
+
         public async Task<List<ContactModel>> LoadContactsAsync()
         {
             try

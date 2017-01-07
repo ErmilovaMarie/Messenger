@@ -1,7 +1,10 @@
-﻿using System;
+﻿using Messenger.Services;
+using Messenger.Views;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Reflection.Emit;
 using System.Text;
 using System.Windows.Input;
@@ -26,8 +29,20 @@ namespace Messenger.ViewModels
         }
         private async void OpenLogin()
         {
-            Debug.WriteLine($"FullName: {FullName}, UserName:{UserName}, Password: {Password}");
-            await _page.Navigation.PopToRootAsync();
+            var dataService = DataService.GetInstance();
+            var status = await dataService.RegisterAsync(FullName, UserName, Password);
+
+            var loginStatus = await dataService.LoginAsync(UserName, Password);
+            var profileStatus = await dataService.ProfileAsync(FullName);
+
+            if (status == HttpStatusCode.OK && loginStatus == HttpStatusCode.OK && profileStatus == HttpStatusCode.OK)
+            {
+                await _page.Navigation.PushAsync(new ContactsPage());
+            }
+            else
+            {
+                await _page.DisplayAlert("Ошибка", "Не удалось зарегистрироваться", "Закрыть"); 
+            }
         }
     }
 }

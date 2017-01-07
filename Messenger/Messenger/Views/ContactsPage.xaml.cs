@@ -16,7 +16,7 @@ namespace Messenger.Views
         public ContactsPage()
         {
             InitializeComponent();
-            _viewmodel = new ContactsViewModel();
+            _viewmodel = new ContactsViewModel(this);
             BindingContext = _viewmodel;
             
         }
@@ -25,10 +25,9 @@ namespace Messenger.Views
             base.OnAppearing();
             await _viewmodel.LoadContactsAsync();
         }
-
-        /*private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
+        private async void ListView_OnItemTapped(object sender, ItemTappedEventArgs e)
         {
             await _viewmodel.OpenChat();
-        }*/
+        }
     }
 }

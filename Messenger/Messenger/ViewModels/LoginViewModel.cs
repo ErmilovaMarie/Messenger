@@ -28,10 +28,6 @@ namespace Messenger.ViewModels
             LoginCommand = new Command(OpenContacts);
             RegisterCommand = new Command(OpenRegister);
         }
-        private async void OpenRegister() //доработать вход
-        {
-            await _page.Navigation.PushAsync(new RegisterPage());
-        }
         private async void OpenContacts()
         {
             var dataService = DataService.GetInstance();
@@ -45,7 +41,10 @@ namespace Messenger.ViewModels
                 await _page.DisplayAlert("Ошибка", "Не удалось выполнить вход", "Закрыть");
             }
         }
-
+        private async void OpenRegister()
+        {
+            await _page.Navigation.PushAsync(new RegisterPage());
+        }
 
     }
 }

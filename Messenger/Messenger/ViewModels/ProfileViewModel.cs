@@ -1,10 +1,12 @@
 ﻿using Messenger.Models;
+using Messenger.Services;
 using Messenger.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Reflection.Emit;
 using System.Text;
 using System.Windows.Input;
@@ -37,8 +39,17 @@ namespace Messenger.ViewModels
         }
         private async void OpenContacts()
         {
-            Debug.WriteLine($"FullName: {FullName}, Image: {Image}");
-            await _page.Navigation.PushAsync(new ContactsPage());
+            var dataService = DataService.GetInstance();
+            var status = await dataService.ProfileAsync(FullName); 
+
+            if (status == HttpStatusCode.OK)
+            {
+                await _page.Navigation.PopAsync();
+            }
+            else
+            {
+                await _page.DisplayAlert("Ошибка", "Не удалось изменить имя", "Выход");
+            }
         }
     }
 }
