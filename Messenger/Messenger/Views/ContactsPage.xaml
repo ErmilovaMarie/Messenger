@@ -11,7 +11,7 @@
       </ContentPage.ToolbarItems>
   <ListView ItemsSource="{Binding Contacts}"
             HasUnevenRows="True"
-            
+            ItemTapped="ListView_OnItemTapped"
             x:Name ="listview">
       <ListView.ItemTemplate>
         <DataTemplate>

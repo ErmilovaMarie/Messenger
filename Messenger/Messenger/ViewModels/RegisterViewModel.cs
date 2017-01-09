@@ -37,7 +37,8 @@ namespace Messenger.ViewModels
 
             if (status == HttpStatusCode.OK && loginStatus == HttpStatusCode.OK && profileStatus == HttpStatusCode.OK)
             {
-                await _page.Navigation.PushAsync(new ContactsPage());
+                var app = (App)Application.Current;
+                app.MainPage = new NavigationPage(new ContactsPage());
             }
             else
             {

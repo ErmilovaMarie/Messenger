@@ -21,6 +21,7 @@ namespace Messenger.ViewModels
         {
             var dataService = DataService.GetInstance();
             var contacts = await dataService.LoadContactsAsync();
+            Contacts.Clear();
 
             foreach (var contact in contacts)
             {
@@ -38,14 +39,14 @@ namespace Messenger.ViewModels
         {
             _page = page;
             ProfileCommand = new Command(OpenProfile);
-            ExitCommand = new Command(OpenLogin);
+            ExitCommand = new Command(Exit);
         }
 
         private async void OpenProfile ()
         {
             await _page.Navigation.PushAsync(new ProfilePage());
         }
-        private async void OpenLogin ()
+        private async void Exit ()
         {
             var app = (App)Application.Current;
             app.MainPage = new NavigationPage(new LoginPage());
