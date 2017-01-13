@@ -1,4 +1,5 @@
 ﻿using Messenger.Models;
+using Messenger.Response;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -104,18 +105,18 @@ namespace Messenger.Services
             }
         }
 
-        public async Task<List<ContactModel>> LoadContactsAsync()
+        public async Task<ContactsResponse> LoadContactsAsync()
         {
             try
             {
                 var json = await _httpClient.GetStringAsync(new Uri($"{_baseUrl}/contacts.json"));
                 var jObj = JObject.Parse(json);
-                return JsonConvert.DeserializeObject<List<ContactModel>>(jObj["Contacts"].ToString());
+                return JsonConvert.DeserializeObject<ContactsResponse>(json);
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
-                return new List<ContactModel>();
+                return new ContactsResponse();
             }
         }
     }
