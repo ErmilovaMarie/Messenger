@@ -23,7 +23,7 @@ namespace Messenger.ViewModels
             var contacts = await dataService.LoadContactsAsync();
             Contacts.Clear();
 
-            foreach (var contact in contacts)
+            foreach (var contact in contacts.Contacts)
             {
                 contact.Image = "http://192.168.43.80:9000/" + contact.Image;
                 Contacts.Add(contact);
